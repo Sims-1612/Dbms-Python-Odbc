@@ -1,0 +1,199 @@
+To modify the code to create tables and insert data into those tables, we need to define the schema of the tables and add SQL queries for table creation and data insertion. Here's an example of how you can modify the code:
+
+```python
+from datetime import datetime
+import time
+import numpy as np
+import mysql.connector as sql
+
+def execute_query(query):
+    db = sql.connect(host='localhost',
+                     user='root',
+                     password='1234',
+                     auth_plugin='mysql_native_password',
+                     database='STUDENT_SOCIETY')
+
+    cur = db.cursor()
+
+    cur.execute(query)
+
+    result = cur.fetchall()
+
+    for row in result:
+        print(row[0])
+
+    cur.close()
+    db.close()
+
+def create_tables():
+    query_create_student_table = """
+    CREATE TABLE IF NOT EXISTS student (
+        rollno INT AUTO_INCREMENT PRIMARY KEY,
+        studentname VARCHAR(255),
+        course VARCHAR(50),
+        DOB DATE
+    )
+    """
+
+    query_create_society_table = """
+    CREATE TABLE IF NOT EXISTS society (
+        socid INT AUTO_INCREMENT PRIMARY KEY,
+        socname VARCHAR(255),
+        totalseats INT,
+        mentorname VARCHAR(255)
+    )
+    """
+
+    query_create_enrollment_table = """
+    CREATE TABLE IF NOT EXISTS enrollment (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        rollno INT,
+        sid INT,
+        FOREIGN KEY (rollno) REFERENCES student(rollno),
+        FOREIGN KEY (sid) REFERENCES society(socid)
+    )
+    """
+
+    # Add more create table queries if needed
+
+    execute_query(query_create_student_table)
+    execute_query(query_create_society_table)
+    execute_query(query_create_enrollment_table)
+    # Execute more create table queries if needed
+
+def insert_data():
+    query_insert_students = """
+    INSERT INTO student (studentname, course, DOB) VALUES
+    ('John Doe', 'CS', '2000-01-01'),
+    ('Jane Smith', 'EE', '2001-05-15'),
+    ('Alice Johnson', 'ME', '1999-08-20')
+    """
+    
+    query_insert_societies = """
+    INSERT INTO society (socname, totalseats, mentorname) VALUES
+    ('Society A', 20, 'Mentor A'),
+    ('Society B', 15, 'Mentor B'),
+    ('Society C', 30, 'Mentor C')
+    """
+    
+    query_insert_enrollments = """
+    INSERT INTO enrollment (rollno, sid) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3)
+    """
+
+    execute_query(query_insert_students)
+    execute_query(query_insert_societies)
+    execute_query(query_insert_enrollments)
+
+def main():
+    create_tables()
+    insert_data()
+
+    # Existing queries go here...
+
+if __name__ == "__main__":
+    main()
+```
+
+This code modifies the original script to include functions for creating tables (`create_tables`) and inserting data (`insert_data`). Adjust the queries and data as per your requirements.To modify the code to create tables and insert data into those tables, we need to define the schema of the tables and add SQL queries for table creation and data insertion. Here's an example of how you can modify the code:
+
+```python
+from datetime import datetime
+import time
+import numpy as np
+import mysql.connector as sql
+
+def execute_query(query):
+    db = sql.connect(host='localhost',
+                     user='root',
+                     password='1234',
+                     auth_plugin='mysql_native_password',
+                     database='STUDENT_SOCIETY')
+
+    cur = db.cursor()
+
+    cur.execute(query)
+
+    result = cur.fetchall()
+
+    for row in result:
+        print(row[0])
+
+    cur.close()
+    db.close()
+
+def create_tables():
+    query_create_student_table = """
+    CREATE TABLE IF NOT EXISTS student (
+        rollno INT AUTO_INCREMENT PRIMARY KEY,
+        studentname VARCHAR(255),
+        course VARCHAR(50),
+        DOB DATE
+    )
+    """
+
+    query_create_society_table = """
+    CREATE TABLE IF NOT EXISTS society (
+        socid INT AUTO_INCREMENT PRIMARY KEY,
+        socname VARCHAR(255),
+        totalseats INT,
+        mentorname VARCHAR(255)
+    )
+    """
+
+    query_create_enrollment_table = """
+    CREATE TABLE IF NOT EXISTS enrollment (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        rollno INT,
+        sid INT,
+        FOREIGN KEY (rollno) REFERENCES student(rollno),
+        FOREIGN KEY (sid) REFERENCES society(socid)
+    )
+    """
+
+    # Add more create table queries if needed
+
+    execute_query(query_create_student_table)
+    execute_query(query_create_society_table)
+    execute_query(query_create_enrollment_table)
+    # Execute more create table queries if needed
+
+def insert_data():
+    query_insert_students = """
+    INSERT INTO student (studentname, course, DOB) VALUES
+    ('John Doe', 'CS', '2000-01-01'),
+    ('Jane Smith', 'EE', '2001-05-15'),
+    ('Alice Johnson', 'ME', '1999-08-20')
+    """
+    
+    query_insert_societies = """
+    INSERT INTO society (socname, totalseats, mentorname) VALUES
+    ('Society A', 20, 'Mentor A'),
+    ('Society B', 15, 'Mentor B'),
+    ('Society C', 30, 'Mentor C')
+    """
+    
+    query_insert_enrollments = """
+    INSERT INTO enrollment (rollno, sid) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3)
+    """
+
+    execute_query(query_insert_students)
+    execute_query(query_insert_societies)
+    execute_query(query_insert_enrollments)
+
+def main():
+    create_tables()
+    insert_data()
+
+    # Existing queries go here...
+
+if __name__ == "__main__":
+    main()
+```
+
+This code modifies the original script to include functions for creating tables (`create_tables`) and inserting data (`insert_data`). Adjust the queries and data as per your requirements.
